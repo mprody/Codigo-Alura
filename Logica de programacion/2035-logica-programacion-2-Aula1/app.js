@@ -1,21 +1,17 @@
-let numeroSecreto=numeroAleatorio();
+let numeroSecreto=0;
 let intentos=1;
+let listaNumerosSorteados =[];
+let numeroMaximo=10;
+
 function AsignarTextoElemento(elemento,texto){
     let elementoHTML = document.querySelector(elemento);
     elementoHTML.innerHTML=texto;    
     return;
 }
 
-
-function numeroAleatorio(){
-    return numAleatorio=Math.floor(Math.random()*10)+1;
-   
-}
-console.log(numeroSecreto);
-
 function verificarIntento(){
     let numeroUsuario =parseInt(document.getElementById("valorUsuario").value);
-    console.log(intentos);
+    
     if(numeroUsuario === numeroSecreto){
         AsignarTextoElemento("p",`Adivinaste el numero en ${intentos} ${(intentos ===1)? "vez":"veces"}`);
         document.getElementById("reiniciar").removeAttribute("disabled");
@@ -31,11 +27,48 @@ function verificarIntento(){
     } 
     return;
 }
+
 function limpiarCaja(){
     document.getElementById("valorUsuario").value="";
     
 }
-AsignarTextoElemento("h1","Juego del numero secreto");
-AsignarTextoElemento("p","Indique un numero del 1 al 10");
+
+
+function numeroAleatorio(){
+    let numeroGenerado = Math.floor(Math.random()*numeroMaximo)+1;
+
+
+    console.log(numeroGenerado);
+    console.log(listaNumerosSorteados);
+    
+    if(listaNumerosSorteados.length == numeroMaximo){
+        AsignarTextoElemento("p","Ya se asignaron todos los numeros posibles!");
+    }else{
+        if(listaNumerosSorteados.includes(numeroGenerado)){
+            return numeroAleatorio();
+        } else {
+            listaNumerosSorteados.push(numeroGenerado);
+            return numeroGenerado;
+        }
+    }
+    return;
+}
+
+
+function condicionesIniciales(){
+    AsignarTextoElemento("h1","Juego del numero secreto");
+    AsignarTextoElemento("p",`Indique un numero del 1 al ${numeroMaximo}`);
+    numeroSecreto=numeroAleatorio();
+    intentos=1;
+}
+
+
+function reiniciarJuego(){
+    limpiarCaja();
+    condicionesIniciales();
+    document.getElementById("reiniciar").setAttribute("disabled",true);
+}
+
+condicionesIniciales();
 
 
