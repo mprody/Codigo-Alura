@@ -1,0 +1,31 @@
+.banner{
+    width: 100%;
+    height: 85vh;
+}
+.parrafo1{
+    padding: 30px;
+}
+.parrafo1 h2{
+    text-align: center;
+}
+
+.lista{
+    padding: 30px;
+}
+.lista h2{
+    text-align: center;
+}
+
+.lista ul{
+    display: inline-block;
+    vertical-align: top;
+    width: 20%;
+    margin-right: 15%;
+}
+.lista .items{
+    font-style: italic;
+}
+.lista img{
+    width: 40%;
+    height: 60vh;
+}
